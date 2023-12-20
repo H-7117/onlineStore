@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Item;
+
 
 class Product extends Model
 {
@@ -15,6 +17,7 @@ class Product extends Model
     * $this->attributes['price'] - int - contains the product price
     * $this->attributes['created_at'] - timestamp - contains the product creation date
     * $this->attributes['updated_at'] - timestamp - contains the product update date
+    * $this->items - Item[] - contains the associated items
     */
 
     public static function validate($request)
@@ -119,5 +122,19 @@ class Product extends Model
         {
         $this->attributes['updated_at'] = $updatedAt;
         }
+// ========================================================================================
+        public function items()
+        {
+        return $this->hasMany(Item::class);
+        }
+        public function getItems()
+        {
+        return $this->items;
+        }
+        public function setItems($items)
+        {
+        $this->items = $items;
+        }
+
 
 }
